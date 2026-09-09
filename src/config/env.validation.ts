@@ -7,5 +7,6 @@ export const configValidationSchema = joi
       .string()
       .valid('development', 'production', 'test')
       .default('development'),
+    CORS_ORIGINS: joi.string().required(),
   })
   .unknown(true);
