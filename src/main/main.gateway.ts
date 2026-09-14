@@ -12,6 +12,14 @@ export class MainGateway implements OnGatewayConnection {
   server: Server;
 
   handleConnection(client: Socket) {
-    console.log(`Client connected: ${client.id}`);
+    // console.log(`Client connected: ${client.id}`);
+    client.emit('welcome', {
+      message: 'Welcome to the chat!',
+      date: new Date(),
+    });
+
+    client.on('message-client', (data) => {
+      console.log(data);
+    });
   }
 }
