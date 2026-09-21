@@ -1,5 +1,8 @@
 import {
+  ConnectedSocket,
+  MessageBody,
   OnGatewayConnection,
+  SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
@@ -17,9 +20,11 @@ export class MainGateway implements OnGatewayConnection {
       message: 'Welcome to the chat!',
       date: new Date(),
     });
+  }
 
-    client.on('message-client', (data) => {
-      console.log(data);
-    });
+  @SubscribeMessage('message-to-server')
+  handleMessage(@ConnectedSocket() client: Socket, @MessageBody() data: any) {
+    console.log(data);
+    this.server.emit('message-from-server', data);
   }
 }
