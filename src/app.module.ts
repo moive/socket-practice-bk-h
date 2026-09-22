@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
-import { MainGateway } from './main/main.gateway.js';
 import { ConfigModule } from '@nestjs/config';
 import { appConfig, configValidationSchema } from './config/index.js';
 import { LoggerModule } from './common/logger/logger.module.js';
+import { ChatModule } from './chat/chat.module.js';
 
 @Module({
   imports: [
@@ -14,8 +14,9 @@ import { LoggerModule } from './common/logger/logger.module.js';
       validationSchema: configValidationSchema,
     }),
     LoggerModule,
+    ChatModule,
   ],
   controllers: [AppController],
-  providers: [AppService, MainGateway],
+  providers: [AppService],
 })
 export class AppModule {}
