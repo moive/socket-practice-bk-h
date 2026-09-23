@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { appConfig, configValidationSchema } from './config/index.js';
 import { LoggerModule } from './common/logger/logger.module.js';
 import { ChatModule } from './chat/chat.module.js';
+import { BandsModule } from './bands/bands.module.js';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ChatModule } from './chat/chat.module.js';
     }),
     LoggerModule,
     ChatModule,
+    BandsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
