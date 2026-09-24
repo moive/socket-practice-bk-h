@@ -28,21 +28,22 @@ export class BandsGateway {
 
   @SubscribeMessage('remove-band')
   handleRemoveBand(@MessageBody() id: string) {
-    this.bandsService.removeBand(id);
-    this.server.emit('bands-update', this.bandsService.getBands());
+    const bands = this.bandsService.removeBand(id);
+    this.server.emit('bands-update', bands);
   }
 
   @SubscribeMessage('increase-votes')
   handleIncreaseVotes(@MessageBody() id: string) {
-    this.bandsService.increaseVotes(id);
-    this.server.emit('bands-update', this.bandsService.getBands());
+    const bands = this.bandsService.increaseVotes(id);
+    this.server.emit('bands-update', bands);
   }
 
   @SubscribeMessage('change-name')
   handleChangeName(
     @MessageBody() { id, newName }: { id: string; newName: string },
   ) {
-    this.bandsService.changeName(id, newName);
-    this.server.emit('bands-update', this.bandsService.getBands());
+    console.log({ id, newName });
+    const bands = this.bandsService.changeName(id, newName);
+    this.server.emit('bands-update', bands);
   }
 }

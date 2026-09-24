@@ -9,18 +9,19 @@ export class BandsService {
     new Band('Queen'),
   ];
 
-  addBand(name: string): Band {
+  addBand(name: string): Band[] {
     const newBand = new Band(name);
     this.bands.push(newBand);
-    return newBand;
+    return this.bands;
   }
 
   getBands(): Band[] {
     return this.bands;
   }
 
-  removeBand(id: string): void {
+  removeBand(id: string) {
     this.bands = this.bands.filter((band) => band.id !== id);
+    return this.bands;
   }
 
   increaseVotes(id: string) {
@@ -28,6 +29,7 @@ export class BandsService {
       if (band.id === id) band.votes += 1;
       return band;
     });
+    return this.bands;
   }
 
   changeName(id: string, newName: string) {
@@ -35,5 +37,6 @@ export class BandsService {
       if (band.id === id) band.name = newName;
       return band;
     });
+    return this.bands;
   }
 }
